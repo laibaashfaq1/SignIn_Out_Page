@@ -20,49 +20,54 @@ export const Dashboard = () => {
   };
 
   return (
-    <>
-      {session ? (
-        <>
-        {/* Account image */}
-          <img
-            src={session.user?.image as string}
-            className="rounded-full h-20 w-20"
-            alt="User Profile"
-          />
-          
-          {/* After Signin this shows */}
-          <h1 className="text-3xl text-black font-bold">
-            Welcome Back {session.user?.name}
-            <p className="text-xl mb-4 mt-2 font-normal">{session.user?.email}</p>
+    <div className="flex justify-center items-center h-screen bg-amber-50">
+      <div className="bg-orange-200 shadow-lg rounded-lg p-8 w-96 text-center">
+        {session ? (
+          <>
+            {/* User's profile image */}
+            <img
+              src={session.user?.image as string}
+              className="rounded-full h-20 w-20 mx-auto mb-4"
+              alt="User Profile"
+            />
+
+            {/* Welcome Message */}
+            <h1 className="text-2xl text-gray-800 font-bold mb-2">
+              Welcome Back, {session.user?.name}
+            </h1>
+            <p className="text-gray-600 mb-4">{session.user?.email}</p>
+
+            {/* Sign Out Button */}
             <button
               onClick={handleSignOut}
-              className="border border-none rounded-lg bg-red-500 text-white font-normal text-xl text-center px-3 py-2 mt-4"
+              className="w-full py-2 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition"
             >
-              Sign out
+              Sign Out
             </button>
-          </h1>
 
-          {/* message show while sign out*/}
-          {message && <div className="mt-4 text-green-600">{message}</div>}
-        </>
-      ) : (
-        <>
+            {/* Message while signing out */}
+            {message && <div className="mt-4 text-green-600">{message}</div>}
+          </>
+        ) : (
+          <>
+            {/* Sign-In Message */}
+            <h1 className="text-2xl text-gray-800 font-bold mb-4">
+              You are not logged in
+            </h1>
 
-        {/* Signin page */}
-          <h1 className="text-3xl text-black font-bold">You are not logged in</h1>
-          <div className="flex space-x-5">
+            {/* Sign-In Button */}
             <button
               onClick={() => handleSignIn('github')}
-              className="border border-none rounded-lg bg-blue-500 text-white px-3 py-3"
+              className="w-full py-2 bg-amber-700 text-white rounded-lg font-medium hover:bg-amber-800 transition"
             >
               Sign in with GitHub
             </button>
-          </div>
 
-          {/* message show while signin */}
-          {message && <div className="mt-4 text-blue-600">{message}</div>}
-        </>
-      )}
-    </>
+            {/* Message while signing in */}
+            {message && <div className="mt-4 text-amber-700">{message}</div>}
+          </>
+        )}
+      </div>
+    </div>
   );
 };
